@@ -33,7 +33,7 @@ function Certifications() {
   const isInView = useInView(ref, { once: true, margin: '-100px' })
 
   return (
-    <section className="py-24 relative">
+    <section id="certifications" className="py-24 relative">
       <div className="max-w-6xl mx-auto px-4 sm:px-6" ref={ref}>
         <motion.div
           initial={{ opacity: 0, y: 40 }}
@@ -50,11 +50,13 @@ function Certifications() {
           <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
             {certifications.map((cert, i) => (
               <motion.div
-                key={i}
+                key={cert.title}
                 initial={{ opacity: 0, y: 30 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ delay: i * 0.15 }}
-                className="glass rounded-2xl p-6 hover:glow-green transition-all hover:-translate-y-1 group"
+                whileHover={{ y: -6 }}
+                whileTap={{ scale: 0.97 }}
+                className="glass rounded-2xl p-6 hover:glow-green transition-shadow group"
               >
                 <div className="flex items-center justify-between mb-4">
                   <div className="p-2.5 glass-subtle rounded-xl">

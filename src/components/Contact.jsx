@@ -19,7 +19,7 @@ const contactInfo = [
     icon: FaLinkedin,
     label: 'LinkedIn',
     value: 'linkedin.com/in/susanth-j',
-    href: 'https://linkedin.com/in/susanth-j-597713227',
+    href: 'https://www.linkedin.com/in/susanth-j-597713227/',
   },
   {
     icon: FaMapMarkerAlt,
@@ -39,6 +39,7 @@ function Contact() {
     e.preventDefault()
     const mailtoLink = `mailto:susanthj14@gmail.com?subject=Portfolio Contact from ${formData.name}&body=${encodeURIComponent(formData.message)}%0A%0AFrom: ${formData.name} (${formData.email})`
     window.location.href = mailtoLink
+    setFormData({ name: '', email: '', message: '' })
     setSubmitted(true)
     setTimeout(() => setSubmitted(false), 3000)
   }

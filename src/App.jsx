@@ -37,7 +37,7 @@ function App() {
         <div className="blob blob-1 -top-48 -left-48" />
         <div className="blob blob-2 top-1/3 -right-32" />
         <div className="blob blob-3 bottom-1/4 left-1/4" />
-        <div className="blob blob-2 -bottom-32 right-1/3" />
+        <div className="blob blob-1 -bottom-32 right-1/3" />
       </div>
 
       <Navbar darkMode={darkMode} toggleDarkMode={toggleDarkMode} />

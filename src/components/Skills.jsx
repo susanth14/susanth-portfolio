@@ -1,5 +1,5 @@
-import { motion, useInView } from 'framer-motion'
-import { useRef } from 'react'
+import { motion, useInView, AnimatePresence } from 'framer-motion'
+import { useRef, useState } from 'react'
 import {
   SiJavascript,
   SiTypescript,
@@ -44,17 +44,18 @@ const skillCategories = [
 ]
 
 const testingTypes = [
-  'Functional Testing',
-  'Regression Testing',
-  'Smoke Testing',
-  'UI Testing',
-  'API Testing',
-  'Cross-browser Testing',
+  { name: 'Functional Testing', hint: 'Verifies each feature works according to business requirements and expected behavior.' },
+  { name: 'Regression Testing', hint: 'Re-runs existing tests after code changes to ensure no existing functionality is broken.' },
+  { name: 'Smoke Testing', hint: 'Quick high-level checks on critical paths to confirm the build is stable before full testing.' },
+  { name: 'UI Testing', hint: 'Validates visual elements, layouts, responsiveness, and user interactions across the application.' },
+  { name: 'API Testing', hint: 'Tests REST API endpoints for correct responses, status codes, and data integrity.' },
+  { name: 'Cross-browser Testing', hint: 'Ensures consistent behavior and appearance across Chrome, Firefox, Safari, and Edge.' },
 ]
 
 function Skills() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: '-100px' })
+  const [activeHint, setActiveHint] = useState(null)
 
   return (
     <section id="skills" className="py-24 relative">
@@ -79,7 +80,8 @@ function Skills() {
                 initial={{ opacity: 0, y: 30 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ delay: catIdx * 0.15 }}
-                className="glass rounded-2xl p-6 hover:glow-green transition-all hover:-translate-y-1"
+                whileHover={{ y: -6 }}
+                className="glass rounded-2xl p-6 hover:glow-green transition-shadow"
               >
                 <h3 className="text-lg font-semibold mb-5 text-primary dark:text-primary-dark">
                   {category.title}
@@ -111,21 +113,64 @@ function Skills() {
             transition={{ delay: 0.5 }}
             className="glass rounded-2xl p-6"
           >
-            <h3 className="text-lg font-semibold mb-4 text-center">Testing Expertise</h3>
+            <h3 className="text-lg font-semibold mb-1 text-center">Testing Expertise</h3>
+            <p className="text-xs text-gray-400 dark:text-gray-500 text-center mb-4">Click any badge to learn more</p>
             <div className="flex flex-wrap justify-center gap-3">
               {testingTypes.map((type, i) => (
-                <motion.span
-                  key={type}
+                <motion.button
+                  key={type.name}
                   initial={{ opacity: 0, scale: 0.8 }}
                   animate={isInView ? { opacity: 1, scale: 1 } : {}}
                   transition={{ delay: 0.6 + i * 0.05 }}
-                  className="px-4 py-2 glass-subtle rounded-full text-sm font-medium text-primary dark:text-primary-dark hover:glow-green transition-all cursor-default"
+                  whileHover={{ scale: 1.07, y: -2 }}
+                  whileTap={{ scale: 0.95 }}
+                  onClick={() => setActiveHint(activeHint?.name === type.name ? null : type)}
+                  className={`px-4 py-2 rounded-full text-sm font-medium transition-all cursor-pointer border ${
+                    activeHint?.name === type.name
+                      ? 'bg-primary dark:bg-primary-dark text-white dark:text-dark-bg border-primary dark:border-primary-dark glow-green'
+                      : 'glass-subtle text-primary dark:text-primary-dark border-transparent hover:glow-green'
+                  }`}
                 >
-                  {type}
-                </motion.span>
+                  {type.name}
+                </motion.button>
               ))}
             </div>
           </motion.div>
+
+          {/* Hint popup */}
+          <AnimatePresence>
+            {activeHint && (
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                className="fixed inset-0 z-50 flex items-center justify-center p-4"
+                onClick={() => setActiveHint(null)}
+              >
+                <div className="absolute inset-0 bg-black/30 backdrop-blur-sm" />
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.85, y: 20 }}
+                  animate={{ opacity: 1, scale: 1, y: 0 }}
+                  exit={{ opacity: 0, scale: 0.85, y: 20 }}
+                  transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+                  className="relative glass-strong rounded-2xl p-6 max-w-sm w-full shadow-2xl border border-primary/20 dark:border-primary-dark/20"
+                  onClick={e => e.stopPropagation()}
+                >
+                  <button
+                    onClick={() => setActiveHint(null)}
+                    className="absolute top-3 right-3 w-7 h-7 flex items-center justify-center rounded-full glass-subtle text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 transition-colors text-lg"
+                  >
+                    ×
+                  </button>
+                  <div className="flex items-center gap-3 mb-3">
+                    <div className="w-2 h-2 rounded-full bg-primary dark:bg-primary-dark" />
+                    <h4 className="font-bold text-gray-900 dark:text-white">{activeHint.name}</h4>
+                  </div>
+                  <p className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">{activeHint.hint}</p>
+                </motion.div>
+              </motion.div>
+            )}
+          </AnimatePresence>
 
           {/* Methodologies */}
           <motion.div

@@ -7,32 +7,15 @@ function Footer() {
     <footer className="relative mt-10">
       <div className="glass-strong rounded-t-3xl">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 py-10">
-          <div className="grid md:grid-cols-3 gap-8 items-center">
-            {/* Logo */}
+          <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+            {/* Name */}
             <div>
-              <p className="text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-primary to-emerald-400 dark:from-primary-dark dark:to-accent mb-2">
-                &lt;SJ /&gt;
+              <p className="text-lg font-bold text-gray-900 dark:text-white mb-1">
+                Susanth Jegadeesan
               </p>
               <p className="text-sm text-gray-500 dark:text-gray-400">
                 QA Test Engineer & Front-End Developer
               </p>
-            </div>
-
-            {/* Quick links */}
-            <div className="flex flex-wrap justify-center gap-4 text-sm">
-              {['Home', 'About', 'Skills', 'Experience', 'Contact'].map(link => (
-                <a
-                  key={link}
-                  href={`#${link.toLowerCase()}`}
-                  onClick={(e) => {
-                    e.preventDefault()
-                    document.querySelector(`#${link.toLowerCase()}`)?.scrollIntoView({ behavior: 'smooth' })
-                  }}
-                  className="text-gray-500 dark:text-gray-400 hover:text-primary dark:hover:text-primary-dark transition-colors"
-                >
-                  {link}
-                </a>
-              ))}
             </div>
 
             {/* Social icons */}
@@ -40,7 +23,7 @@ function Footer() {
               {[
                 { icon: FaEnvelope, href: 'mailto:susanthj14@gmail.com', label: 'Email' },
                 { icon: FaPhone, href: 'tel:+918754326992', label: 'Phone' },
-                { icon: FaLinkedin, href: 'https://linkedin.com/in/susanth-j-597713227', label: 'LinkedIn' },
+                { icon: FaLinkedin, href: 'https://www.linkedin.com/in/susanth-j-597713227/', label: 'LinkedIn' },
               ].map(({ icon: Icon, href, label }) => (
                 <a
                   key={label}

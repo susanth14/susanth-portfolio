@@ -1,6 +1,21 @@
-import { motion, useInView } from 'framer-motion'
-import { useRef } from 'react'
+import { motion, useInView, useSpring, useTransform } from 'framer-motion'
+import { useRef, useEffect } from 'react'
 import { FaCheckCircle } from 'react-icons/fa'
+
+function AnimatedCounter({ value, isInView }) {
+  const numStr = value.replace(/[^0-9]/g, '')
+  const suffix = value.replace(/[0-9]/g, '')
+  const num = parseInt(numStr) || 0
+  const spring = useSpring(0, { stiffness: 60, damping: 18 })
+  const display = useTransform(spring, (v) => Math.round(v) + suffix)
+
+  useEffect(() => {
+    if (isInView && num > 0) spring.set(num)
+  }, [isInView, num, spring])
+
+  if (!num) return <span>{value}</span>
+  return <motion.span>{display}</motion.span>
+}
 
 function About() {
   const ref = useRef(null)
@@ -38,7 +53,7 @@ function About() {
           <p className="text-gray-500 dark:text-gray-400 text-center mb-12">Get to know me better</p>
 
           <div className="grid md:grid-cols-2 gap-12 items-start">
-            {/* Stats grid */}
+            {/* Animated stats */}
             <div className="grid grid-cols-2 gap-4">
               {stats.map((stat, i) => (
                 <motion.div
@@ -46,10 +61,11 @@ function About() {
                   initial={{ opacity: 0, scale: 0.8 }}
                   animate={isInView ? { opacity: 1, scale: 1 } : {}}
                   transition={{ delay: 0.1 + i * 0.1 }}
-                  className="glass rounded-2xl p-6 text-center hover:glow-green transition-all hover:-translate-y-1"
+                  whileHover={{ y: -6, scale: 1.04 }}
+                  className="glass rounded-2xl p-6 text-center hover:glow-green transition-shadow cursor-default"
                 >
                   <p className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-br from-primary to-emerald-400 dark:from-primary-dark dark:to-accent">
-                    {stat.value}
+                    <AnimatedCounter value={stat.value} isInView={isInView} />
                   </p>
                   <p className="text-gray-600 dark:text-gray-400 text-sm mt-1">{stat.label}</p>
                 </motion.div>

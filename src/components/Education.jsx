@@ -27,7 +27,7 @@ function Education() {
             transition={{ delay: 0.2 }}
             className="max-w-2xl mx-auto"
           >
-            <div className="glass rounded-2xl p-8 hover:glow-green transition-all hover:-translate-y-1">
+            <motion.div whileHover={{ y: -6 }} className="glass rounded-2xl p-8 hover:glow-green transition-shadow">
               <div className="flex items-start gap-5">
                 <div className="relative shrink-0">
                   <div className="absolute inset-0 bg-primary dark:bg-primary-dark rounded-xl opacity-20 blur-md" />
@@ -50,7 +50,7 @@ function Education() {
                   </p>
                 </div>
               </div>
-            </div>
+            </motion.div>
           </motion.div>
         </motion.div>
       </div>

@@ -53,19 +53,24 @@ function Experience() {
           <p className="text-gray-500 dark:text-gray-400 text-center mb-12">My professional journey</p>
 
           <div className="relative">
-            {/* Timeline line - glass style */}
-            <div className="hidden md:block absolute left-8 top-0 bottom-0 w-px bg-gradient-to-b from-primary/30 via-primary/10 to-transparent dark:from-primary-dark/30 dark:via-primary-dark/10" />
+            {/* Animated timeline line */}
+            <motion.div
+              className="hidden md:block absolute left-8 top-0 w-px bg-gradient-to-b from-primary/30 via-primary/10 to-transparent dark:from-primary-dark/30 dark:via-primary-dark/10"
+              initial={{ height: 0 }}
+              animate={isInView ? { height: '100%' } : {}}
+              transition={{ duration: 1.2, ease: 'easeOut', delay: 0.3 }}
+            />
 
             <div className="space-y-8">
               {experiences.map((exp, i) => (
                 <motion.div
-                  key={i}
-                  initial={{ opacity: 0, x: -30 }}
-                  animate={isInView ? { opacity: 1, x: 0 } : {}}
-                  transition={{ delay: i * 0.2 }}
+                  key={exp.title}
+                  initial={{ opacity: 0, x: -30, filter: 'blur(6px)' }}
+                  animate={isInView ? { opacity: 1, x: 0, filter: 'blur(0px)' } : {}}
+                  transition={{ delay: i * 0.25, duration: 0.6 }}
                   className="relative md:pl-20"
                 >
-                  {/* Timeline dot with glow */}
+                  {/* Timeline dot */}
                   <div className="hidden md:flex absolute left-5 top-6 w-7 h-7 rounded-full items-center justify-center z-10">
                     <div className="absolute inset-0 bg-primary dark:bg-primary-dark rounded-full opacity-30 blur-sm" />
                     <div className="relative w-full h-full bg-gradient-to-br from-primary to-emerald-500 dark:from-primary-dark dark:to-accent rounded-full flex items-center justify-center shadow-lg">
@@ -73,7 +78,10 @@ function Experience() {
                     </div>
                   </div>
 
-                  <div className="glass rounded-2xl p-6 hover:glow-green transition-all hover:-translate-y-0.5">
+                  <motion.div
+                    whileHover={{ y: -4 }}
+                    className="glass rounded-2xl p-6 hover:glow-green transition-shadow"
+                  >
                     <div className="flex flex-wrap items-start justify-between gap-3 mb-4">
                       <div>
                         <h3 className="text-xl font-bold text-gray-900 dark:text-white">{exp.title}</h3>
@@ -91,24 +99,33 @@ function Experience() {
 
                     <ul className="space-y-2.5 mb-4">
                       {exp.points.map((point, j) => (
-                        <li key={j} className="flex items-start gap-2 text-gray-600 dark:text-gray-300 text-sm">
+                        <motion.li
+                          key={j}
+                          initial={{ opacity: 0, x: 10 }}
+                          animate={isInView ? { opacity: 1, x: 0 } : {}}
+                          transition={{ delay: i * 0.25 + 0.4 + j * 0.05 }}
+                          className="flex items-start gap-2 text-gray-600 dark:text-gray-300 text-sm"
+                        >
                           <span className="mt-1.5 w-1.5 h-1.5 bg-primary dark:bg-primary-dark rounded-full shrink-0" />
                           {point}
-                        </li>
+                        </motion.li>
                       ))}
                     </ul>
 
                     <div className="flex flex-wrap gap-2">
-                      {exp.tags.map(tag => (
-                        <span
+                      {exp.tags.map((tag, k) => (
+                        <motion.span
                           key={tag}
+                          initial={{ opacity: 0, scale: 0.8 }}
+                          animate={isInView ? { opacity: 1, scale: 1 } : {}}
+                          transition={{ delay: i * 0.25 + 0.6 + k * 0.05 }}
                           className="px-3 py-1 glass-subtle rounded-full text-xs font-medium text-primary dark:text-primary-dark"
                         >
                           {tag}
-                        </span>
+                        </motion.span>
                       ))}
                     </div>
-                  </div>
+                  </motion.div>
                 </motion.div>
               ))}
             </div>

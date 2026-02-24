@@ -9,6 +9,7 @@ const navLinks = [
   { name: 'Skills', href: '#skills' },
   { name: 'Experience', href: '#experience' },
   { name: 'Education', href: '#education' },
+  { name: 'Certifications', href: '#certifications' },
   { name: 'Contact', href: '#contact' },
 ]
 
@@ -16,10 +17,15 @@ function Navbar({ darkMode, toggleDarkMode }) {
   const [isOpen, setIsOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const [activeSection, setActiveSection] = useState('home')
+  const [progress, setProgress] = useState(0)
 
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20)
+
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight
+      setProgress(docHeight > 0 ? (window.scrollY / docHeight) * 100 : 0)
+
       const sections = navLinks.map(link => link.href.slice(1))
       for (let i = sections.length - 1; i >= 0; i--) {
         const el = document.getElementById(sections[i])
@@ -45,16 +51,35 @@ function Navbar({ darkMode, toggleDarkMode }) {
       animate={{ y: 0 }}
       transition={{ duration: 0.5 }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        scrolled
-          ? 'glass-strong shadow-lg'
-          : 'bg-transparent'
+        scrolled ? 'glass-strong shadow-lg' : 'bg-transparent'
       }`}
     >
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <div className="flex items-center justify-between h-16">
-          <a href="#home" onClick={(e) => handleClick(e, '#home')} className="text-xl font-bold text-primary dark:text-primary-dark drop-shadow-sm">
-            &lt;SJ /&gt;
-          </a>
+          <motion.a
+            href="#home"
+            onClick={(e) => handleClick(e, '#home')}
+            className="shrink-0 relative"
+            whileHover={{ scale: 1.12, rotate: 8 }}
+            whileTap={{ scale: 0.92 }}
+            transition={{ type: 'spring', stiffness: 300, damping: 15 }}
+          >
+            {/* Spinning ring */}
+            <div
+              className="absolute -inset-0.5 rounded-xl spin-slow opacity-90"
+              style={{ background: 'conic-gradient(from 0deg, #16a34a, #4ade80, #a3e635, #16a34a)' }}
+            />
+            {/* Badge */}
+            <div className="relative w-9 h-9 rounded-xl bg-gradient-to-br from-primary to-emerald-500 dark:from-primary-dark dark:to-accent flex items-center justify-center shadow-md">
+              <motion.span
+                className="text-white dark:text-dark-bg text-sm font-bold tracking-tight"
+                animate={{ scale: [1, 1.15, 1] }}
+                transition={{ repeat: Infinity, duration: 2.5, ease: 'easeInOut' }}
+              >
+                SJ
+              </motion.span>
+            </div>
+          </motion.a>
 
           <div className="hidden md:flex items-center gap-1">
             {navLinks.map(link => (
@@ -98,6 +123,12 @@ function Navbar({ darkMode, toggleDarkMode }) {
           </div>
         </div>
       </div>
+
+      {/* Scroll progress bar */}
+      <div
+        className="absolute bottom-0 left-0 h-0.5 bg-gradient-to-r from-primary via-emerald-400 to-accent transition-all duration-150"
+        style={{ width: `${progress}%` }}
+      />
 
       <AnimatePresence>
         {isOpen && (

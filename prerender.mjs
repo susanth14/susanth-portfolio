@@ -1,0 +1,60 @@
+import { createServer } from 'vite'
+import fs from 'node:fs'
+import path from 'node:path'
+import { fileURLToPath } from 'node:url'
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url))
+
+// Polyfill browser globals so React + Framer Motion render without errors
+global.window = {
+  matchMedia: () => ({
+    matches: false,
+    addListener: () => {},
+    removeListener: () => {},
+    addEventListener: () => {},
+    removeEventListener: () => {},
+  }),
+  scrollY: 0,
+  addEventListener: () => {},
+  removeEventListener: () => {},
+}
+global.document = {
+  documentElement: { classList: { add: () => {}, remove: () => {} } },
+  getElementById: () => null,
+  querySelector: () => null,
+}
+global.localStorage = { getItem: () => null, setItem: () => {} }
+global.IntersectionObserver = class {
+  constructor() {}
+  observe() {}
+  unobserve() {}
+  disconnect() {}
+}
+global.ResizeObserver = class {
+  constructor() {}
+  observe() {}
+  unobserve() {}
+  disconnect() {}
+}
+
+const vite = await createServer({
+  server: { middlewareMode: true },
+  appType: 'custom',
+  logLevel: 'error',
+})
+
+try {
+  const { render } = await vite.ssrLoadModule('/src/entry-server.jsx')
+  const appHtml = render()
+
+  const template = fs.readFileSync(path.resolve(__dirname, 'dist/index.html'), 'utf-8')
+  const html = template.replace('<div id="root"></div>', `<div id="root">${appHtml}</div>`)
+
+  fs.writeFileSync(path.resolve(__dirname, 'dist/index.html'), html)
+  console.log('✓ Pre-render complete — content is now visible in page source')
+} catch (e) {
+  console.error('✗ Pre-render failed:', e.message)
+  process.exit(1)
+} finally {
+  await vite.close()
+}
