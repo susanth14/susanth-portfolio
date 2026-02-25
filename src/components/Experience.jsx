@@ -65,8 +65,8 @@ function Experience() {
               {experiences.map((exp, i) => (
                 <motion.div
                   key={exp.title}
-                  initial={{ opacity: 0, x: -30, filter: 'blur(6px)' }}
-                  animate={isInView ? { opacity: 1, x: 0, filter: 'blur(0px)' } : {}}
+                  initial={{ opacity: 0, x: -30 }}
+                  animate={isInView ? { opacity: 1, x: 0 } : {}}
                   transition={{ delay: i * 0.25, duration: 0.6 }}
                   className="relative md:pl-20"
                 >

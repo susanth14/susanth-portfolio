@@ -64,13 +64,13 @@ function Hero() {
 
           {/* Name */}
           <motion.h1
-            initial={{ opacity: 0, y: 20, filter: 'blur(8px)' }}
-            animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3, duration: 0.6 }}
             className="text-4xl sm:text-5xl md:text-6xl font-bold mb-4"
           >
             Susanth{' '}
-            <span className="animate-shimmer">Jegadeesan</span>
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-emerald-400 dark:from-primary-dark dark:to-accent">Jegadeesan</span>
           </motion.h1>
 
           {/* Cycling role badge */}
@@ -90,8 +90,8 @@ function Hero() {
           </div>
 
           <motion.p
-            initial={{ opacity: 0, y: 20, filter: 'blur(6px)' }}
-            animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5, duration: 0.6 }}
             className="text-gray-600 dark:text-gray-400 text-lg max-w-2xl mx-auto mb-8 leading-relaxed"
           >
