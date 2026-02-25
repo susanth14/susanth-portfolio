@@ -9,6 +9,9 @@
 /image.webp
   Cache-Control: public, max-age=31536000, immutable
 
+/og-image.png
+  Cache-Control: public, max-age=31536000, immutable
+
 # Root HTML — always revalidate so users get the latest
 /
   Cache-Control: public, max-age=0, must-revalidate
