@@ -87,7 +87,7 @@ function About() {
                     key={i}
                     initial={{ opacity: 0, x: 20 }}
                     animate={isInView ? { opacity: 1, x: 0 } : {}}
-                    transition={{ delay: 0.3 + i * 0.1 }}
+                    transition={{ delay: 0.3 + i * 0.1 }}  
                     className="flex items-start gap-3 p-2 rounded-xl hover:bg-white/30 dark:hover:bg-white/5 transition-colors"
                   >
                     <FaCheckCircle className="text-primary dark:text-primary-dark mt-1 shrink-0" />
