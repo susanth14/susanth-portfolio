@@ -1,4 +1,4 @@
-import { motion, useInView, AnimatePresence } from 'framer-motion'
+import { m, useInView, AnimatePresence } from 'framer-motion'
 import { useRef, useState } from 'react'
 import {
   SiJavascript,
@@ -60,7 +60,7 @@ function Skills() {
   return (
     <section id="skills" className="py-24 relative">
       <div className="max-w-6xl mx-auto px-4 sm:px-6" ref={ref}>
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 40 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
@@ -75,7 +75,7 @@ function Skills() {
 
           <div className="grid md:grid-cols-3 gap-6 mb-10">
             {skillCategories.map((category, catIdx) => (
-              <motion.div
+              <m.div
                 key={category.title}
                 initial={{ opacity: 0, y: 30 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -88,7 +88,7 @@ function Skills() {
                 </h3>
                 <div className="grid grid-cols-2 gap-3">
                   {category.skills.map((skill, i) => (
-                    <motion.div
+                    <m.div
                       key={skill.name}
                       initial={{ opacity: 0, scale: 0.8 }}
                       animate={isInView ? { opacity: 1, scale: 1 } : {}}
@@ -99,15 +99,15 @@ function Skills() {
                       <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
                         {skill.name}
                       </span>
-                    </motion.div>
+                    </m.div>
                   ))}
                 </div>
-              </motion.div>
+              </m.div>
             ))}
           </div>
 
           {/* Testing types */}
-          <motion.div
+          <m.div
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ delay: 0.5 }}
@@ -117,7 +117,7 @@ function Skills() {
             <p className="text-xs text-gray-400 dark:text-gray-500 text-center mb-4">Click any badge to learn more</p>
             <div className="flex flex-wrap justify-center gap-3">
               {testingTypes.map((type, i) => (
-                <motion.button
+                <m.button
                   key={type.name}
                   initial={{ opacity: 0, scale: 0.8 }}
                   animate={isInView ? { opacity: 1, scale: 1 } : {}}
@@ -132,15 +132,15 @@ function Skills() {
                   }`}
                 >
                   {type.name}
-                </motion.button>
+                </m.button>
               ))}
             </div>
-          </motion.div>
+          </m.div>
 
           {/* Hint popup */}
           <AnimatePresence>
             {activeHint && (
-              <motion.div
+              <m.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
@@ -148,7 +148,7 @@ function Skills() {
                 onClick={() => setActiveHint(null)}
               >
                 <div className="absolute inset-0 bg-black/30 backdrop-blur-sm" />
-                <motion.div
+                <m.div
                   initial={{ opacity: 0, scale: 0.85, y: 20 }}
                   animate={{ opacity: 1, scale: 1, y: 0 }}
                   exit={{ opacity: 0, scale: 0.85, y: 20 }}
@@ -167,13 +167,13 @@ function Skills() {
                     <h4 className="font-bold text-gray-900 dark:text-white">{activeHint.name}</h4>
                   </div>
                   <p className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">{activeHint.hint}</p>
-                </motion.div>
-              </motion.div>
+                </m.div>
+              </m.div>
             )}
           </AnimatePresence>
 
           {/* Methodologies */}
-          <motion.div
+          <m.div
             initial={{ opacity: 0 }}
             animate={isInView ? { opacity: 1 } : {}}
             transition={{ delay: 0.7 }}
@@ -187,8 +187,8 @@ function Skills() {
                 {method}
               </span>
             ))}
-          </motion.div>
-        </motion.div>
+          </m.div>
+        </m.div>
       </div>
     </section>
   )

@@ -1,4 +1,4 @@
-import { motion, useInView, useSpring, useTransform } from 'framer-motion'
+import { m, useInView, useSpring, useTransform } from 'framer-motion'
 import { useRef, useEffect } from 'react'
 import { FaCheckCircle } from 'react-icons/fa'
 
@@ -14,7 +14,7 @@ function AnimatedCounter({ value, isInView }) {
   }, [isInView, num, spring])
 
   if (!num) return <span>{value}</span>
-  return <motion.span>{display}</motion.span>
+  return <m.span>{display}</m.span>
 }
 
 function About() {
@@ -39,7 +39,7 @@ function About() {
   return (
     <section id="about" className="py-24 relative">
       <div className="max-w-6xl mx-auto px-4 sm:px-6" ref={ref}>
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 40 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
@@ -56,7 +56,7 @@ function About() {
             {/* Animated stats */}
             <div className="grid grid-cols-2 gap-4">
               {stats.map((stat, i) => (
-                <motion.div
+                <m.div
                   key={stat.label}
                   initial={{ opacity: 0, scale: 0.8 }}
                   animate={isInView ? { opacity: 1, scale: 1 } : {}}
@@ -68,7 +68,7 @@ function About() {
                     <AnimatedCounter value={stat.value} isInView={isInView} />
                   </p>
                   <p className="text-gray-600 dark:text-gray-400 text-sm mt-1">{stat.label}</p>
-                </motion.div>
+                </m.div>
               ))}
             </div>
 
@@ -83,7 +83,7 @@ function About() {
               </p>
               <div className="space-y-3">
                 {highlights.map((item, i) => (
-                  <motion.div
+                  <m.div
                     key={i}
                     initial={{ opacity: 0, x: 20 }}
                     animate={isInView ? { opacity: 1, x: 0 } : {}}
@@ -92,12 +92,12 @@ function About() {
                   >
                     <FaCheckCircle className="text-primary dark:text-primary-dark mt-1 shrink-0" />
                     <span className="text-gray-600 dark:text-gray-300 text-sm">{item}</span>
-                  </motion.div>
+                  </m.div>
                 ))}
               </div>
             </div>
           </div>
-        </motion.div>
+        </m.div>
       </div>
     </section>
   )

@@ -1,4 +1,4 @@
-import { motion, useInView } from 'framer-motion'
+import { m, useInView } from 'framer-motion'
 import { useRef, useState } from 'react'
 import { FaEnvelope, FaPhone, FaLinkedin, FaMapMarkerAlt } from 'react-icons/fa'
 
@@ -50,7 +50,7 @@ function Contact() {
       <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-96 h-96 bg-green-400/10 dark:bg-green-400/5 rounded-full blur-3xl -z-10" />
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6" ref={ref}>
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 40 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
@@ -76,7 +76,7 @@ function Contact() {
 
               <div className="space-y-3">
                 {contactInfo.map((item, i) => (
-                  <motion.div
+                  <m.div
                     key={item.label}
                     initial={{ opacity: 0, x: -20 }}
                     animate={isInView ? { opacity: 1, x: 0 } : {}}
@@ -108,13 +108,13 @@ function Contact() {
                         </div>
                       </div>
                     )}
-                  </motion.div>
+                  </m.div>
                 ))}
               </div>
             </div>
 
             {/* Contact Form */}
-            <motion.form
+            <m.form
               initial={{ opacity: 0, x: 20 }}
               animate={isInView ? { opacity: 1, x: 0 } : {}}
               transition={{ delay: 0.3 }}
@@ -171,9 +171,9 @@ function Contact() {
                   {submitted ? 'Opening Email Client...' : 'Send Message'}
                 </button>
               </div>
-            </motion.form>
+            </m.form>
           </div>
-        </motion.div>
+        </m.div>
       </div>
     </section>
   )

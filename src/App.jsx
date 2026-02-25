@@ -1,6 +1,9 @@
 import { useState, useEffect, lazy, Suspense } from 'react'
+import { LazyMotion } from 'framer-motion'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
+
+const loadFeatures = () => import('./lib/motionFeatures').then(r => r.default)
 
 const About = lazy(() => import('./components/About'))
 const Skills = lazy(() => import('./components/Skills'))
@@ -32,6 +35,7 @@ function App() {
   const toggleDarkMode = () => setDarkMode(prev => !prev)
 
   return (
+    <LazyMotion features={loadFeatures}>
     <div className="min-h-screen bg-gradient-to-br from-gray-50 via-green-50/30 to-emerald-50/20 dark:from-dark-bg dark:via-dark-bg dark:to-dark-bg text-gray-900 dark:text-gray-100 transition-colors duration-300 relative overflow-x-hidden">
       {/* Global floating blobs for glassmorphism depth */}
       <div className="fixed inset-0 -z-10 overflow-hidden pointer-events-none">
@@ -57,6 +61,7 @@ function App() {
         <Footer />
       </Suspense>
     </div>
+    </LazyMotion>
   )
 }
 

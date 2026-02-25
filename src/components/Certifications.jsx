@@ -1,4 +1,4 @@
-import { motion, useInView } from 'framer-motion'
+import { m, useInView } from 'framer-motion'
 import { useRef } from 'react'
 import { FaCertificate } from 'react-icons/fa'
 import { SiReact, SiNodedotjs } from 'react-icons/si'
@@ -35,7 +35,7 @@ function Certifications() {
   return (
     <section id="certifications" className="py-24 relative">
       <div className="max-w-6xl mx-auto px-4 sm:px-6" ref={ref}>
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 40 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
@@ -49,7 +49,7 @@ function Certifications() {
 
           <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
             {certifications.map((cert, i) => (
-              <motion.div
+              <m.div
                 key={cert.title}
                 initial={{ opacity: 0, y: 30 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -73,10 +73,10 @@ function Certifications() {
                   <FaCertificate size={12} className="text-primary/50 dark:text-primary-dark/50" />
                   <span className="text-xs font-medium">{cert.issuer}</span>
                 </div>
-              </motion.div>
+              </m.div>
             ))}
           </div>
-        </motion.div>
+        </m.div>
       </div>
     </section>
   )

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { m, AnimatePresence } from 'framer-motion'
 import { HiMenu, HiX } from 'react-icons/hi'
 import { BsSun, BsMoon } from 'react-icons/bs'
 
@@ -46,7 +46,7 @@ function Navbar({ darkMode, toggleDarkMode }) {
   }
 
   return (
-    <motion.nav
+    <m.nav
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.5 }}
@@ -56,7 +56,7 @@ function Navbar({ darkMode, toggleDarkMode }) {
     >
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <div className="flex items-center justify-between h-16">
-          <motion.a
+          <m.a
             href="#home"
             onClick={(e) => handleClick(e, '#home')}
             className="shrink-0 relative"
@@ -71,15 +71,15 @@ function Navbar({ darkMode, toggleDarkMode }) {
             />
             {/* Badge */}
             <div className="relative w-9 h-9 rounded-xl bg-gradient-to-br from-primary to-emerald-500 dark:from-primary-dark dark:to-accent flex items-center justify-center shadow-md">
-              <motion.span
+              <m.span
                 className="text-white dark:text-dark-bg text-sm font-bold tracking-tight"
                 animate={{ scale: [1, 1.15, 1] }}
                 transition={{ repeat: Infinity, duration: 2.5, ease: 'easeInOut' }}
               >
                 SJ
-              </motion.span>
+              </m.span>
             </div>
-          </motion.a>
+          </m.a>
 
           <div className="hidden md:flex items-center gap-1">
             {navLinks.map(link => (
@@ -132,7 +132,7 @@ function Navbar({ darkMode, toggleDarkMode }) {
 
       <AnimatePresence>
         {isOpen && (
-          <motion.div
+          <m.div
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
@@ -154,10 +154,10 @@ function Navbar({ darkMode, toggleDarkMode }) {
                 </a>
               ))}
             </div>
-          </motion.div>
+          </m.div>
         )}
       </AnimatePresence>
-    </motion.nav>
+    </m.nav>
   )
 }
 

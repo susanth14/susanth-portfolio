@@ -1,4 +1,4 @@
-import { motion, useInView } from 'framer-motion'
+import { m, useInView } from 'framer-motion'
 import { useRef } from 'react'
 import { FaGraduationCap } from 'react-icons/fa'
 
@@ -9,7 +9,7 @@ function Education() {
   return (
     <section id="education" className="py-24 relative">
       <div className="max-w-6xl mx-auto px-4 sm:px-6" ref={ref}>
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 40 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
@@ -21,13 +21,13 @@ function Education() {
           </h2>
           <p className="text-gray-500 dark:text-gray-400 text-center mb-12">My academic background</p>
 
-          <motion.div
+          <m.div
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ delay: 0.2 }}
             className="max-w-2xl mx-auto"
           >
-            <motion.div whileHover={{ y: -6 }} className="glass rounded-2xl p-8 hover:glow-green transition-shadow">
+            <m.div whileHover={{ y: -6 }} className="glass rounded-2xl p-8 hover:glow-green transition-shadow">
               <div className="flex items-start gap-5">
                 <div className="relative shrink-0">
                   <div className="absolute inset-0 bg-primary dark:bg-primary-dark rounded-xl opacity-20 blur-md" />
@@ -50,9 +50,9 @@ function Education() {
                   </p>
                 </div>
               </div>
-            </motion.div>
-          </motion.div>
-        </motion.div>
+            </m.div>
+          </m.div>
+        </m.div>
       </div>
     </section>
   )

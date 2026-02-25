@@ -47,9 +47,16 @@ try {
   const { render } = await vite.ssrLoadModule('/src/entry-server.jsx')
   const appHtml = render()
 
-  const template = fs.readFileSync(path.resolve(__dirname, 'dist/index.html'), 'utf-8')
-  const html = template.replace('<div id="root"></div>', `<div id="root">${appHtml}</div>`)
+  let template = fs.readFileSync(path.resolve(__dirname, 'dist/index.html'), 'utf-8')
 
+  // Inject <link rel="preload"> for the hashed CSS bundle to reduce render-blocking impact
+  const cssMatch = template.match(/href="(\/assets\/index-[^"]+\.css)"/)
+  if (cssMatch) {
+    const preloadTag = `<link rel="preload" as="style" href="${cssMatch[1]}" />\n    `
+    template = template.replace('<link rel="stylesheet"', preloadTag + '<link rel="stylesheet"')
+  }
+
+  const html = template.replace('<div id="root"></div>', `<div id="root">${appHtml}</div>`)
   fs.writeFileSync(path.resolve(__dirname, 'dist/index.html'), html)
   console.log('✓ Pre-render complete — content is now visible in page source')
 } catch (e) {

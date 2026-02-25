@@ -1,4 +1,4 @@
-import { motion, useInView } from 'framer-motion'
+import { m, useInView } from 'framer-motion'
 import { useRef } from 'react'
 import { FaBriefcase } from 'react-icons/fa'
 
@@ -39,7 +39,7 @@ function Experience() {
   return (
     <section id="experience" className="py-24 relative">
       <div className="max-w-6xl mx-auto px-4 sm:px-6" ref={ref}>
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 40 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
@@ -54,7 +54,7 @@ function Experience() {
 
           <div className="relative">
             {/* Animated timeline line */}
-            <motion.div
+            <m.div
               className="hidden md:block absolute left-8 top-0 w-px bg-gradient-to-b from-primary/30 via-primary/10 to-transparent dark:from-primary-dark/30 dark:via-primary-dark/10"
               initial={{ height: 0 }}
               animate={isInView ? { height: '100%' } : {}}
@@ -63,7 +63,7 @@ function Experience() {
 
             <div className="space-y-8">
               {experiences.map((exp, i) => (
-                <motion.div
+                <m.div
                   key={exp.title}
                   initial={{ opacity: 0, x: -30 }}
                   animate={isInView ? { opacity: 1, x: 0 } : {}}
@@ -78,7 +78,7 @@ function Experience() {
                     </div>
                   </div>
 
-                  <motion.div
+                  <m.div
                     whileHover={{ y: -4 }}
                     className="glass rounded-2xl p-6 hover:glow-green transition-shadow"
                   >
@@ -99,7 +99,7 @@ function Experience() {
 
                     <ul className="space-y-2.5 mb-4">
                       {exp.points.map((point, j) => (
-                        <motion.li
+                        <m.li
                           key={j}
                           initial={{ opacity: 0, x: 10 }}
                           animate={isInView ? { opacity: 1, x: 0 } : {}}
@@ -108,13 +108,13 @@ function Experience() {
                         >
                           <span className="mt-1.5 w-1.5 h-1.5 bg-primary dark:bg-primary-dark rounded-full shrink-0" />
                           {point}
-                        </motion.li>
+                        </m.li>
                       ))}
                     </ul>
 
                     <div className="flex flex-wrap gap-2">
                       {exp.tags.map((tag, k) => (
-                        <motion.span
+                        <m.span
                           key={tag}
                           initial={{ opacity: 0, scale: 0.8 }}
                           animate={isInView ? { opacity: 1, scale: 1 } : {}}
@@ -122,15 +122,15 @@ function Experience() {
                           className="px-3 py-1 glass-subtle rounded-full text-xs font-medium text-primary dark:text-primary-dark"
                         >
                           {tag}
-                        </motion.span>
+                        </m.span>
                       ))}
                     </div>
-                  </motion.div>
-                </motion.div>
+                  </m.div>
+                </m.div>
               ))}
             </div>
           </div>
-        </motion.div>
+        </m.div>
       </div>
     </section>
   )
