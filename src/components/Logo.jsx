@@ -10,11 +10,17 @@ function Logo() {
       <div className="absolute inset-0 rounded-full bg-white dark:bg-dark-bg" />
       {/* Photo on top */}
       <div className="relative w-full h-full rounded-full overflow-hidden">
-        <img
-          src="/image.png"
-          alt="Susanth"
-          className="w-full h-full object-cover object-top"
-        />
+        <picture>
+          <source srcSet="/image.webp" type="image/webp" />
+          <img
+            src="/image.png"
+            alt="Susanth"
+            className="w-full h-full object-cover object-top"
+            width="36"
+            height="36"
+            loading="lazy"
+          />
+        </picture>
       </div>
     </div>
   )

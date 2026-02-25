@@ -69,6 +69,8 @@ body {
   filter: blur(80px);
   opacity: 0.4;
   animation: blobMove 20s ease-in-out infinite alternate;
+  will-change: transform;
+  transform: translateZ(0);
 }
 .dark .blob { opacity: 0.15; }
 
@@ -126,13 +128,14 @@ body {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   animation: shimmer 3s linear infinite;
+  will-change: background-position;
 }
 
 /* Spinning conic ring (avatar border) */
 @keyframes spin-slow {
   to { transform: rotate(360deg); }
 }
-.spin-slow { animation: spin-slow 4s linear infinite; }
+.spin-slow { animation: spin-slow 4s linear infinite; will-change: transform; }
 
 /* Fade-in-up utility */
 @keyframes fadeInUp {

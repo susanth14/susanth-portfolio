@@ -18,7 +18,7 @@ function Hero() {
     <section id="home" className="min-h-screen flex items-center justify-center relative pt-16">
       {/* Decorative blobs */}
       <div className="absolute inset-0 -z-10 overflow-hidden">
-        <div className="absolute top-32 left-1/4 w-64 h-64 bg-green-400/20 dark:bg-green-400/10 rounded-full blur-3xl animate-pulse" />
+        <div className="absolute top-32 left-1/4 w-64 h-64 bg-green-400/20 dark:bg-green-400/10 rounded-full blur-3xl" />
         <div className="absolute bottom-32 right-1/4 w-80 h-80 bg-emerald-300/15 dark:bg-emerald-400/5 rounded-full blur-3xl" />
       </div>
 
@@ -46,13 +46,18 @@ function Hero() {
               <div className="absolute -inset-1 rounded-full bg-white dark:bg-dark-bg" />
               {/* Photo */}
               <div className="relative w-full h-full rounded-full overflow-hidden shadow-2xl">
-                <img
-                  src="/image.png"
-                  alt="Susanth Jegadeesan"
-                  className="w-full h-full object-cover object-top"
-                  fetchPriority="high"
-                  decoding="async"
-                />
+                <picture>
+                  <source srcSet="/image.webp" type="image/webp" />
+                  <img
+                    src="/image.png"
+                    alt="Susanth Jegadeesan"
+                    className="w-full h-full object-cover object-top"
+                    fetchPriority="high"
+                    decoding="async"
+                    width="144"
+                    height="144"
+                  />
+                </picture>
               </div>
             </motion.div>
           </motion.div>
